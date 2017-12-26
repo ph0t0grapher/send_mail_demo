@@ -1,14 +1,16 @@
-
-
+/**
+ * Created by ph0t0grapher
+ */
 var nodemailer = require('nodemailer')
+var emailConfig = require('../config/config')
 var smtpTransport = require('nodemailer-smtp-transport');
 
 smtpTransport = nodemailer.createTransport(smtpTransport({
-    host: 'smtp.exmail.qq.com',
-    port: 465,
+    host: emailConfig.email.host,
+    port: emailConfig.email.port,
     auth: {
-        user: 'liuyan@puokr.org',
-        pass: 'jhmf98u35utyU'
+        user: emailConfig.email.user,
+        pass: emailConfig.email.pass
     }
 }));
 
@@ -21,7 +23,7 @@ var sendMail = function (recipient, subject, html) {
 
     smtpTransport.sendMail({
 
-        from: 'liuyan@puokr.org',
+        from: emailConfig.email.user,
         to: recipient,
         subject: subject,
         html: html
